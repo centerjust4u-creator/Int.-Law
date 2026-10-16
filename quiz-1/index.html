@@ -95,7 +95,6 @@ h1{font-family:Georgia,"Times New Roman",serif;margin:6px 0 0;font-size:clamp(1.
 <section id="game" class="hidden">
 <div class="top"><span class="pill" id="prog"></span><span class="pill f" id="streak"></span><span class="pill s" id="score"></span></div>
 <div class="bar"><i id="fill"></i></div>
-<div class="tbar" id="tbar"><i id="tfill"></i></div>
 <div class="tools"><span class="tag" id="tag" style="margin:0"></span><span><button class="mini" id="lifeBtn" type="button"></button> <button class="mini" id="sndBtn" type="button">🔊</button></span></div>
 <h2 class="q" id="qtext"></h2>
 <div class="opts" id="opts"></div>
@@ -183,8 +182,6 @@ function render(){
   b.onclick=function(){pick(i)};box.appendChild(b);
  });
  lifeLabel();
- clearInterval(timer);tleft=TIME;$("tbar").classList.remove("low");$("tfill").style.width="100%";
- timer=setInterval(function(){tleft-=.1;$("tfill").style.width=Math.max(tleft/TIME*100,0)+"%";if(tleft<8)$("tbar").classList.add("low");if(tleft<=0){clearInterval(timer);pick(-1)}},100);
 }
 function isRight(it){return cur.t==="tf"?(it.v===cur.a):it.v===true}
 function fifty(){
