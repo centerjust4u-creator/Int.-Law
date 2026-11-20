@@ -148,10 +148,11 @@ function results(){
    '<div class="pct">'+pc+'%</div><p style="font-size:1.25rem;margin-top:8px"><b>'+score+' / '+n+'</b> correct</p><p class="msg">'+msg+'</p><div class="acts">'+
    '<button class="btn gold" id="rs">Restart the Quiz</button>'+
    (wrong.length?'<button class="btn ghost" id="rw">Retry wrong answers ('+wrong.length+')</button>':'')+
-   '</div></section><section class="rev" style="margin-top:22px"><h2>Review</h2>';
-  log.forEach(function(l,k){
+   '</div></section><section class="rev" style="margin-top:22px"><h2>'+(wrong.length?'Questions you answered incorrectly':'Perfect score')+'</h2>';
+  if(!wrong.length){h+='<div class="ri ok"><div class="q">You answered every question correctly. Excellent work!</div></div>'}
+  wrong.forEach(function(l,k){
     var q=l.q,sel=q.t==="tf"?q.o[l.sel]:LET[l.sel]+". "+q.o[l.sel],c=q.t==="tf"?q.o[q.c]:LET[q.c]+". "+q.o[q.c];
-    h+='<div class="ri '+(l.ok?"ok":"bad")+'"><div class="q"><b>'+(k+1)+'.</b> '+esc(q.q)+'</div><div class="a">Your answer: <b>'+esc(sel)+'</b>'+(l.ok?"":' &nbsp;·&nbsp; Correct answer: <b>'+esc(c)+'</b>')+'</div></div>';
+    h+='<div class="ri bad"><div class="q"><b>'+(k+1)+'.</b> '+esc(q.q)+'</div><div class="a">Your answer: <b>'+esc(sel)+'</b></div><div class="a">Correct answer: <b>'+esc(c)+'</b></div><div class="a" style="margin-top:4px">'+esc(q.e)+'</div></div>';
   });
   h+='</section>';
   app.innerHTML=h;prog.style.width="100%";window.scrollTo(0,0);
